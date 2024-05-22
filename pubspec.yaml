@@ -17,10 +17,19 @@ dependencies:
   http: ^1.2.1
   smooth_page_indicator: ^1.1.0
   speech_to_text: ^6.6.1
+  flutter_svg: ^2.0.10+1
+  cached_network_image: ^3.3.1
+  intl: ^0.18.0
+  get_storage: ^2.1.1
+  internet_connection_checker: ^1.0.0+1
+  connectivity_plus: ^6.0.3
 
 dev_dependencies:
   flutter_lints: ^3.0.0
   flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  flutter_localizations:
     sdk: flutter
 
 # For information on the generic Dart part of this file, see the

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:mynewpackage/app/modules/restaurants_and_dishes_listing/views/restaurants_and_dishes_listing_view.dart';
 import 'package:mynewpackage/app_colors.dart';
 import 'package:mynewpackage/generated/assets.dart';
+import 'package:mynewpackage/mynewpackage.dart';
 import 'package:mynewpackage/widgets/common_Image_view.dart';
 
 import '../controllers/home_controller.dart';
@@ -86,7 +87,7 @@ class HomeView extends GetView<HomeController> {
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
                       onTap: (){
-                        controller.gridItemsName[index] == "Food"? Get.to(() => RestaurantsAndDishesListingView()):null;
+                        controller.gridItemsName[index] == "Food"? Get.to(RestaurantsAndDishesListingView()):null;
                       },
                       child: Card(
                           shape: RoundedRectangleBorder(
