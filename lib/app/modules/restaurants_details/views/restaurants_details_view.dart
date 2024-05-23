@@ -131,13 +131,13 @@ class _ChipWidgetState extends State<ChipWidget> {
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                       color:
-                          selectedIndex == index ? Colors.white : Colors.black,
+                      selectedIndex == index ? Colors.white : Colors.black,
                     ),
                   ),
                 ],
               ),
               backgroundColor:
-                  selectedIndex == index ? AppColors.primaryColor : null,
+              selectedIndex == index ? AppColors.primaryColor : null,
             ),
           );
         },
@@ -193,8 +193,8 @@ class SearchWidgetState extends State<SearchWidget> {
     searchController.text = _speechToText.isListening
         ? _lastWords
         : _speechEnabled
-            ? 'Tap the microphone to start listening...'
-            : 'Speech not available';
+        ? 'Tap the microphone to start listening...'
+        : 'Speech not available';
     setState(() {
       micSize = 60.0;
     });
@@ -374,7 +374,7 @@ class BannerAndRatingWidget extends StatelessWidget {
               const BannerCarousal(),
               const Padding(
                 padding:
-                    EdgeInsets.only(left: 150, right: 10, top: 10, bottom: 5),
+                EdgeInsets.only(left: 150, right: 10, top: 10, bottom: 5),
                 child: Text(
                   "This popular, unassuming eatery dishes up an array of traditional Indian fare.",
                   style: TextStyle(

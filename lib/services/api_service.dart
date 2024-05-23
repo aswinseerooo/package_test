@@ -15,7 +15,7 @@ class ApiService extends GetConnect implements GetxService {
   final String baseUrl;
   late Map<String, String> _headers;
 
-  AppStorage storage = Get.find();
+  AppStorage storage = Get.put(AppStorage());
   int nullResCount = 0;
   bool showingExpiryDialog = false;
 
@@ -35,13 +35,17 @@ class ApiService extends GetConnect implements GetxService {
       {required String url,
         Method? method = Method.POST,
         Map<String, dynamic>? params}) async {
+    debugPrint("base url $baseUrl");
     Response response;
     try {
       bool result = await InternetConnectionChecker().hasConnection;
       if (result == true) {
+        debugPrint("connection $result");
+
         if (storage.isAuthenticated()) {
           updateHeaders();
         }
+
         if (method == Method.POST) {
           response = await post(url, params, headers: _headers);
         } else if (method == Method.DELETE) {
@@ -53,6 +57,7 @@ class ApiService extends GetConnect implements GetxService {
         }
         debugPrint("request url : ${baseUrl}$url");
         debugPrint("request : $params");
+        debugPrint("headers : $_headers");
         debugPrint("status code :${response.statusCode}  ulr : ${url}");
         log("response : ${response.body}");
         if (response.body == null && nullResCount < 2) {
@@ -66,10 +71,10 @@ class ApiService extends GetConnect implements GetxService {
             //  throw Exception("Something Went Wrong");
             return await refreshTokenApi(url, params, method);
           }
-          /*else if (response.statusCode == 403) {
-            showExpiryDialog();
-            throw Exception("Something Went Wrong");
-          }*/
+          // else if (response.statusCode == 403) {
+          //   return await refreshTokenApi(url, params, method);
+          //
+          // }
           else if (response.statusCode == 500) {
             throw Exception("Server Error");
           } else {
@@ -95,8 +100,7 @@ class ApiService extends GetConnect implements GetxService {
   }
 
   updateHeaders() {
-    _headers['Authorization'] =
-    "${storage.getTokenType()} ${storage.getAccessToken()}";
+    _headers['Authorization'] ="Bearer ${storage.getAccessToken()}";
   }
 
   Future<Response> refreshTokenApi(
