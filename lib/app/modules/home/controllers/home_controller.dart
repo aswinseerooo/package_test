@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -212,7 +211,7 @@ class HomeController extends GetxController {
         debugPrint("after failure${value.message}");
 
         ScaffoldMessenger.of(Get.context!).showSnackBar(
-            SnackBar(content: Text(value.message.toString() ?? "",),backgroundColor: Colors.red,));
+            SnackBar(content: Text(value.message.toString(),),backgroundColor: Colors.red,));
       }
     });
   }
