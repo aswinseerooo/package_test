@@ -182,7 +182,7 @@ class HomeController extends GetxController {
       });
     }else{
       ScaffoldMessenger.of(Get.context!).showSnackBar(
-          SnackBar(content: Text("No Internet",), backgroundColor: Colors.red,));
+          const SnackBar(content: Text("No Internet",), backgroundColor: Colors.red,));
     }
   }
 
