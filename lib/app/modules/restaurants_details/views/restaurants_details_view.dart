@@ -30,7 +30,7 @@ class _RestaurantsDetailsViewState extends State<RestaurantsDetailsView> {
   @override
   void initState() {
     restaurantsDetailsController.getRestaurantdetails(
-        restaurantId: widget.restaurantId, page: 1, limit: 1);
+        restaurantId: widget.restaurantId, initial: true);
     Get.lazyPut(() => RestaurantsDetailsController());
     super.initState();
   }
@@ -54,52 +54,73 @@ class _RestaurantsDetailsViewState extends State<RestaurantsDetailsView> {
         isAsyncCall: restaurantsDetailsController.isLoading,
         showBackGroundData: false,
         authenticated: true.obs,
-        child: SingleChildScrollView(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  const BannerAndRatingWidget(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const SearchWidget(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const ChipWidget(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Obx(
-                     () {
-                      return ListView.separated(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return DishCard(
-                            dishName: restaurantsDetailsController.restaurantDetails[index].storeProducts?.name ?? '',
-                            price: restaurantsDetailsController
-                                .restaurantDetails[index].storeProducts?.price ?? '',
-                                rating: restaurantsDetailsController
-                                .restaurantDetails[index].storeProducts?.rating ?? 0,
-                            index: index,
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return const SizedBox(
-                            height: 10,
-                          );
-                        },
-                        itemCount: restaurantsDetailsController.restaurantDetails.length,
-                      );
-                    }
+        child: NotificationListener<ScrollNotification>(
+          onNotification: (scrollInfo) {
+            return restaurantsDetailsController.onScrollOngoing(scrollInfo,
+                restaurantId: widget.restaurantId);
+          },
+          child: Obx(() {
+            return restaurantsDetailsController.restaurantDetails.isEmpty
+                ? const Center(
+                    child: Text("No data found!"),
                   )
-                ],
-              ),
-            ),
-          ),
+                : SingleChildScrollView(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          children: [
+                            const BannerAndRatingWidget(),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            const SearchWidget(),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            const ChipWidget(),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Obx(() {
+                              return ListView.separated(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return DishCard(
+                                    dishName: restaurantsDetailsController
+                                            .restaurantDetails[index]
+                                            .storeProducts
+                                            ?.name ??
+                                        '',
+                                    price: restaurantsDetailsController
+                                            .restaurantDetails[index]
+                                            .storeProducts
+                                            ?.price ??
+                                        '',
+                                    rating: restaurantsDetailsController
+                                            .restaurantDetails[index]
+                                            .storeProducts
+                                            ?.rating ??
+                                        0,
+                                    index: index,
+                                  );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return const SizedBox(
+                                    height: 10,
+                                  );
+                                },
+                                itemCount: restaurantsDetailsController
+                                    .restaurantDetails.length,
+                              );
+                            })
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+          }),
         ),
       ),
     );

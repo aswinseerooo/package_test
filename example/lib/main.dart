@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: "Poetsen One",
       ),
-      home: const MyPackage(clientId: 'SGD_test_a0aefba9-5ffe-4661-8ef0-6b332371fe66', clientSecrete: 'SGD_test_a8e77599-9242-44f7-9a0d-4321a7ccbd5e',),
+      home: const MyPackage(clientId: 'SGD_test_55be429e-485b-45c2-b281-3f818d32769a', clientSecrete: 'SGD_test_8a680b2b-f8d0-491a-8346-63f3a2cace04',),
     );
   }
 }
