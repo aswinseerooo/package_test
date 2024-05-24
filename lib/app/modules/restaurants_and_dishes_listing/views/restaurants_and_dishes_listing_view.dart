@@ -18,6 +18,9 @@ class RestaurantsAndDishesListingView
 
   final HomeController homeController = Get.put(HomeController());
   @override
+  final RestaurantsAndDishesListingController controller =
+      Get.put(RestaurantsAndDishesListingController());
+  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
